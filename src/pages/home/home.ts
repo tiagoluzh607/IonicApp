@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Carro } from "../../modelos/carro";
 
 @Component({
   selector: 'page-home',
@@ -7,7 +8,7 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  public carros;
+  public carros: Carro[];
 
   constructor(public navCtrl: NavController) {
     this.carros = [
@@ -17,7 +18,8 @@ export class HomePage {
         { nome: "C3 1.0", preco: 22000},
         { nome: "Uno Fire", preco: 11000},
         { nome: "Sentra 2.0", preco: 53000},
-        { nome: "Astra Sedan", preco: 39000}
+        { nome: "Astra Sedan", preco: 39000},
+        { nome: "Hilux 4x4", preco: 90000}
       ];
 
 
