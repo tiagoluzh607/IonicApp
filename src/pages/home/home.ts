@@ -49,7 +49,6 @@ export class HomePage implements NavLifecycles {
       }
 
 
-
       selecionaCarro(carro: Carro){
           console.log(carro);
           this.navCtrl.push(EscolhaPage);
