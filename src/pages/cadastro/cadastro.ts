@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ion
 import { Carro } from '../../modelos/carro';
 import { AgendamentosServiceProvider } from '../../providers/agendamentos-service/agendamentos-service';
 import { HomePage } from '../home/home';
+import { Agendamento } from '../../modelos/agendamento';
 
 @IonicPage()
 @Component({
@@ -31,7 +32,7 @@ export class CadastroPage {
   agenda(){
 
 
-    let agendamento = {
+    let agendamento : Agendamento = {
       nomeCliente: this.nome,
       enderecoCliente: this.endereco,
       emailCliente: this.email,
