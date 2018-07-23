@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { HttpClientModule } from "@angular/common/http";
 import { CarrosServiceProvider } from '../providers/carros-service/carros-service';
 import { AgendamentosServiceProvider } from '../providers/agendamentos-service/agendamentos-service';
+import { IonicStorageModule } from '@ionic/storage' //para persistência
 
 @NgModule({
   declarations: [
@@ -18,7 +19,12 @@ import { AgendamentosServiceProvider } from '../providers/agendamentos-service/a
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot({ //para persistênci:a
+      name: 'aluracar', //nome do banco
+      storeName: 'agendamentos', //nome da tabela
+      driverOrder: ['indexeddb'] //qual ambiente de persistencia irei usar sqlite? indexedbd?
+    }) 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
