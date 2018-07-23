@@ -66,10 +66,18 @@ export class CadastroPage {
 
 
     this._agendamentosService.agenda(agendamento)
-      .mergeMap(() => this.salva(agendamento)) //juntando 2 observable o do servico da api com o observable que vem retornado do banco na funcao salva
+      .mergeMap((valor) =>{ //juntando 2 observable o do servico da api com o observable que vem retornado do banco na funcao salva
+        let observable = this.salva(agendamento); 
+        if(valor instanceof Error){
+          throw valor;
+          
+        }
+        return observable;
+        
+      }) 
       .subscribe(
         (sucess) => this._alerta.setSubTitle('Agendamento realizado!').present(),
-        (erro) => this._alerta.setSubTitle('Falha no agendamento, tente novamente mais tarde! ').present()
+        (erro : Error) => this._alerta.setSubTitle(erro.message).present()
       );
   }
 
