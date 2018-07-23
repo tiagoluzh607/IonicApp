@@ -4,6 +4,8 @@ import { Carro } from '../../modelos/carro';
 import { AgendamentosServiceProvider } from '../../providers/agendamentos-service/agendamentos-service';
 import { HomePage } from '../home/home';
 import { Agendamento } from '../../modelos/agendamento';
+import { Storage } from '@ionic/storage'
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -23,7 +25,11 @@ export class CadastroPage {
 
   private _alerta : Alert;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _agendamentosService: AgendamentosServiceProvider, private _alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private _agendamentosService: AgendamentosServiceProvider, 
+    private _alertCtrl: AlertController,
+    private _storage: Storage) { //banco
     this.carro = this.navParams.get('carroSelecionado');
     this.precoTotal = this.navParams.get('precoTotal');
 
@@ -51,16 +57,19 @@ export class CadastroPage {
       enderecoCliente: this.endereco,
       emailCliente: this.email,
       modeloCarro: this.carro.nome,
-      precoTotal: this.precoTotal
+      precoTotal: this.precoTotal,
+      confirmado: false,
+      enviado: false
     };
 
     this.criaAlerta();
 
 
     this._agendamentosService.agenda(agendamento)
+      .mergeMap(() => this.salva(agendamento)) //juntando 2 observable o do servico da api com o observable que vem retornado do banco na funcao salva
       .subscribe(
-        () => this._alerta.setSubTitle('Agendamento realizado!').present(),
-        () => this._alerta.setSubTitle('Falha no agendamento, tente novamente mais tarde! ').present()
+        (sucess) => this._alerta.setSubTitle('Agendamento realizado!').present(),
+        (erro) => this._alerta.setSubTitle('Falha no agendamento, tente novamente mais tarde! ').present()
       );
   }
 
@@ -76,4 +85,14 @@ export class CadastroPage {
       }]
     });
   }
+
+
+  salva(agendamento : Agendamento){
+
+    let chave = this.email + this.data.substr(0, 10); //criando uma chave, para recuperar o objeto depois com um get
+
+    let promisse = this._storage.set(chave, agendamento); //retorna uma promisse
+    return Observable.fromPromise(promisse); //converte para observable e retorna um observable
+  }
+
 }

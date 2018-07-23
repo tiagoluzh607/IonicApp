@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
+import { Agendamento } from '../../modelos/agendamento';
 
 @Injectable()
 export class AgendamentosServiceProvider {
@@ -11,8 +12,9 @@ export class AgendamentosServiceProvider {
     
   }
 
-  agenda(agendamento){
-    return this._http.post(this._url+'/agendamento/agenda', agendamento); //retorna um observable
+  agenda(agendamento : Agendamento){
+    return this._http.post(this._url+'/agendamento/agenda', agendamento) //retorna um observable
+    .do(() => agendamento.enviado = true);
   }
 
 }
