@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ionic-angular';
 import { Carro } from '../../modelos/carro';
 import { AgendamentosServiceProvider } from '../../providers/agendamentos-service/agendamentos-service';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -52,7 +53,12 @@ export class CadastroPage {
   private criaAlerta() {
     this._alerta = this._alertCtrl.create({
       title: 'Aviso',
-      buttons: [{ text: 'ok' }]
+      buttons: [{ 
+        text: 'ok', 
+        handler: () =>{
+          this.navCtrl.setRoot(HomePage); //setRoot nao empilha porem direciona o usuario para a raiz do app nesse nao colocamos o .name
+        }
+      }]
     });
   }
 }
