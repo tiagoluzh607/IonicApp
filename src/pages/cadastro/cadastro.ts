@@ -31,6 +31,20 @@ export class CadastroPage {
 
   agenda(){
 
+    //validação dos dados
+    if(!this.nome || !this.endereco || !this.email){
+
+      this._alertCtrl.create({
+        title: 'Preenchimento obrigatório',
+        subTitle: 'Preencha todos os campos',
+        buttons:[
+          { text: 'ok'}
+        ]
+      }).present();
+
+      return;
+    }
+
 
     let agendamento : Agendamento = {
       nomeCliente: this.nome,
