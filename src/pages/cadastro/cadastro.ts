@@ -4,8 +4,7 @@ import { Carro } from '../../modelos/carro';
 import { AgendamentosServiceProvider } from '../../providers/agendamentos-service/agendamentos-service';
 import { HomePage } from '../home/home';
 import { Agendamento } from '../../modelos/agendamento';
-import { Storage } from '@ionic/storage'
-import { Observable } from 'rxjs/Observable';
+import { AgendamentoDaoProvider } from '../../providers/agendamento-dao/agendamento-dao';
 
 @IonicPage()
 @Component({
@@ -29,7 +28,8 @@ export class CadastroPage {
     public navParams: NavParams, 
     private _agendamentosService: AgendamentosServiceProvider, 
     private _alertCtrl: AlertController,
-    private _storage: Storage) { //banco
+    private _agendamentoDao: AgendamentoDaoProvider) { //banco
+
     this.carro = this.navParams.get('carroSelecionado');
     this.precoTotal = this.navParams.get('precoTotal');
 
@@ -58,6 +58,7 @@ export class CadastroPage {
       emailCliente: this.email,
       modeloCarro: this.carro.nome,
       precoTotal: this.precoTotal,
+      data: this.data,
       confirmado: false,
       enviado: false
     };
@@ -67,7 +68,7 @@ export class CadastroPage {
 
     this._agendamentosService.agenda(agendamento)
       .mergeMap((valor) =>{ //juntando 2 observable o do servico da api com o observable que vem retornado do banco na funcao salva
-        let observable = this.salva(agendamento); 
+        let observable = this._agendamentoDao.salva(agendamento); 
         if(valor instanceof Error){
           throw valor;
           
@@ -95,12 +96,6 @@ export class CadastroPage {
   }
 
 
-  salva(agendamento : Agendamento){
 
-    let chave = this.email + this.data.substr(0, 10); //criando uma chave, para recuperar o objeto depois com um get
-
-    let promisse = this._storage.set(chave, agendamento); //retorna uma promisse
-    return Observable.fromPromise(promisse); //converte para observable e retorna um observable
-  }
 
 }
