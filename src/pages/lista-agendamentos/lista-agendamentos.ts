@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AgendamentoDaoProvider } from '../../providers/agendamento-dao/agendamento-dao';
+import { Agendamento } from '../../modelos/agendamento';
 
 @IonicPage()
 @Component({
@@ -8,11 +10,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListaAgendamentosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  agendamentos: Agendamento[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _agendamentoDao: AgendamentoDaoProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaAgendamentosPage');
+    
+    this._agendamentoDao.listaTodos()
+      .subscribe(
+        (agendamentos: Agendamento[])=>{ //caso operação der certo temos acesso a lista de agendamentos que estava dentro do observable passado como parâmetro
+          this.agendamentos = agendamentos;
+        },
+        (erro: Error) => {console.log(erro.message)}
+      );
   }
 
 }

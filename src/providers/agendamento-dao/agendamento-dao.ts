@@ -34,4 +34,14 @@ export class AgendamentoDaoProvider {
     return Observable.fromPromise(promisse); //retorna um observable com valendo true ou false
        
   }
+
+  listaTodos(){
+    let agendamentos: Agendamento[] = [];
+
+    let promisse = this._storage.forEach((agendamento: Agendamento) => {
+      return agendamentos.push(agendamento);
+    });
+
+    return Observable.fromPromise(promisse); //retorna uma observable, com a lista dentro dele
+  }
 }
