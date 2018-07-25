@@ -24,4 +24,14 @@ export class AgendamentoDaoProvider {
     let promisse = this._storage.set(chave, agendamento); //retorna uma promisse
     return Observable.fromPromise(promisse); //converte para observable e retorna um observable
   }
+
+  ehDuplicado(agendamento: Agendamento){
+    let chave = this._geraChave(agendamento);
+
+    //Método get retorna uma promisse por isso vamos converter para um observable
+
+    let promisse = this._storage.get(chave).then(dado => dado ? true : false);//se o dado existir retona true, senao retorna false
+    return Observable.fromPromise(promisse); //retorna um observable com valendo true ou false
+       
+  }
 }

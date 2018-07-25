@@ -65,15 +65,27 @@ export class CadastroPage {
 
     this.criaAlerta();
 
+    /* 
+        mergeMap é o seguinte você trabalha nele com o retorno da funcao que você executou como parâmetro, e consegue retornar ainda outro observable
+        para fazer oque quiser subscribe ou mergeMap novamente você escolhe, nao usamos o sucess pois o sucess nao tem retorno 
+        somente o mergeMap tem retorno e obrigatoriamente de um observable.
+    */
+    this._agendamentoDao.ehDuplicado(agendamento)
+      .mergeMap((retornoEhDuplicado) => {
 
-    this._agendamentosService.agenda(agendamento)
-      .mergeMap((valor) =>{ //juntando 2 observable o do servico da api com o observable que vem retornado do banco na funcao salva
-        let observable = this._agendamentoDao.salva(agendamento); 
-        if(valor instanceof Error){
-          throw valor;
-          
+        if(retornoEhDuplicado){ // se esta duplicado lanca um erro
+          throw new Error('Erro registro duplicado');
         }
-        return observable;
+
+        return this._agendamentosService.agenda(agendamento); //senao já executa a chamada para api, que por sua vez retorna outro observable
+      })
+      .mergeMap((retornoAgenda) =>{ //juntando 2 observable o do servico da api com o observable que vem retornado do banco na funcao salva
+        let observableSalva = this._agendamentoDao.salva(agendamento); 
+        
+        if(retornoAgenda instanceof Error){ //se estourar um erro em salva agendamento, estoura o erro aqui no principal
+          throw retornoAgenda;   
+        }
+        return observableSalva; //se nao tiver erro retorna o observable
         
       }) 
       .subscribe(
