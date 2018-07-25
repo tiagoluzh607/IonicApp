@@ -1,9 +1,11 @@
 <ion-menu [content]="conteudo">
-    <ion-list>
-        <button menuClose ion-item *ngFor="let pagina of paginas">
-            <ion-icon [name]="pagina.icone" item-left></ion-icon>
-            {{pagina.titulo}}
-        </button>
-    </ion-list>
+    <ion-content>
+        <ion-list>
+            <button menuClose ion-item *ngFor="let pagina of paginas">
+                <ion-icon [name]="pagina.icone" item-left></ion-icon>
+                {{pagina.titulo}}
+            </button>
+        </ion-list>
+    </ion-content>
 </ion-menu>
 <ion-nav [root]="rootPage" #conteudo></ion-nav>
