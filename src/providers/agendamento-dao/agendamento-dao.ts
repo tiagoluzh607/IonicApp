@@ -39,9 +39,9 @@ export class AgendamentoDaoProvider {
     let agendamentos: Agendamento[] = [];
 
     let promisse = this._storage.forEach((agendamento: Agendamento) => {
-      return agendamentos.push(agendamento);
-    });
+      agendamentos.push(agendamento);
+    }).then(()=> agendamentos); //retorna a lista de agendamentos, dentro da promisse
 
-    return Observable.fromPromise(promisse); //retorna uma observable, com a lista dentro dele
+    return Observable.fromPromise(promisse); //retorna uma observable, com a lista dentro dele (pois converteu a promisse)
   }
 }
