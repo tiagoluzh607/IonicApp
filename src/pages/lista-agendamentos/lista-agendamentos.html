@@ -18,6 +18,11 @@
   <ion-list>
     <ion-item [class.falha]="!agendamento.enviado" *ngFor="let agendamento of agendamentos">
       {{agendamento.nomeCliente}} - {{agendamento.modeloCarro}}
+
+      <button *ngIf="!agendamento.enviado" item-end icon-only clear ion-button
+              (click)="reenvia(agendamento)">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 
