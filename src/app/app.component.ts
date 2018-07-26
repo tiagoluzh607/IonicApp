@@ -5,13 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListaAgendamentosPage } from '../pages/lista-agendamentos/lista-agendamentos';
+import { LoginPage } from '../pages/login/login';
 @Component({
   selector: 'myapp',
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) public nav: Nav; //capturando o componente de navegação da view
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
 
   public paginas = [
     {titulo: 'Agendamentos', componente: ListaAgendamentosPage.name, icone:'calendar'}
