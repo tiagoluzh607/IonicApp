@@ -1,12 +1,14 @@
-<ion-menu [content]="conteudo">
-    <ion-content>
-        <ion-list>
-            <button menuClose ion-item *ngFor="let pagina of paginas"
-                (click)="irParaPagina(pagina.componente)">
-                <ion-icon [name]="pagina.icone" item-left></ion-icon>
-                {{pagina.titulo}}
-            </button>
-        </ion-list>
-    </ion-content>
-</ion-menu>
-<ion-nav [root]="rootPage" #conteudo swipeBackEnabled="false"></ion-nav>
+<!--Ion split pane coloca o menu lateral a mostra em dispositivos grandes-->
+<ion-split-pane>
+    <ion-menu [content]="conteudo">
+        <ion-content>
+            <ion-list>
+                <button menuClose ion-item *ngFor="let pagina of paginas" (click)="irParaPagina(pagina.componente)">
+                    <ion-icon [name]="pagina.icone" item-left></ion-icon>
+                    {{pagina.titulo}}
+                </button>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-nav [root]="rootPage"  main   #conteudo swipeBackEnabled="false"></ion-nav>
+</ion-split-pane>
