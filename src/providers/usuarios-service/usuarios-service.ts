@@ -19,7 +19,7 @@ export class UsuariosServiceProvider {
   }
 
   efetuaLogin(email : string, senha: string){
-    return this._http.post<Usuario>('http://localhost:8080/api/login', {email, senha})
+    return this._http.post<Usuario>('http://192.168.15.3:8080/api/login', {email, senha})
                       .do((usuario: Usuario) => this._usuarioLogado = usuario);
 
   }
