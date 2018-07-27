@@ -6,6 +6,7 @@ import { HomePage } from '../home/home';
 import { Agendamento } from '../../modelos/agendamento';
 import { AgendamentoDaoProvider } from '../../providers/agendamento-dao/agendamento-dao';
 import { Vibration } from '@ionic-native/vibration'; //import apos instalar plugins cordova e ionic package
+import { DatePicker } from '@ionic-native/date-picker';
 
 @IonicPage()
 @Component({
@@ -30,7 +31,8 @@ export class CadastroPage {
     private _agendamentosService: AgendamentosServiceProvider, 
     private _alertCtrl: AlertController,
     private _agendamentoDao: AgendamentoDaoProvider, //banco 
-    private _vibration : Vibration) { 
+    private _vibration : Vibration,
+    private _datePicker: DatePicker) { 
 
     this.carro = this.navParams.get('carroSelecionado');
     this.precoTotal = this.navParams.get('precoTotal');
@@ -99,6 +101,14 @@ export class CadastroPage {
       );
   }
 
+  //trabalhando com datepicker nativo primeiro exibo o datepicker
+  selecionaData(){
+    this._datePicker.show({
+      date: new Date(),
+      mode: 'date'
+    })
+    .then(data => this.data = data.toISOString()); //capturando data escolhida no date picker e passando para propriedade date
+  }
 
   private criaAlerta() {
     this._alerta = this._alertCtrl.create({
