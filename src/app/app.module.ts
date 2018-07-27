@@ -18,6 +18,7 @@ import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/observable/of'
 import { AgendamentoDaoProvider } from '../providers/agendamento-dao/agendamento-dao';
 import { LoginPage } from '../pages/login/login';
+import { UsuariosServiceProvider } from '../providers/usuarios-service/usuarios-service';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { LoginPage } from '../pages/login/login';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CarrosServiceProvider,
     AgendamentosServiceProvider,
-    AgendamentoDaoProvider
+    AgendamentoDaoProvider,
+    UsuariosServiceProvider
   ]
 })
 export class AppModule {}
