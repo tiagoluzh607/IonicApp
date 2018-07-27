@@ -5,10 +5,8 @@ import { Carro } from "../../modelos/carro";
 @Injectable()
 export class CarrosServiceProvider {
 
-  private _http : HttpClient;
-
-  constructor(private _htt: HttpClient) {
-    this._http = _htt;
+  constructor(private _http: HttpClient) {
+    
   }
 
   lista(){
