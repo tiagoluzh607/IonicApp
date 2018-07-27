@@ -1,16 +1,16 @@
 <!--Ion split pane coloca o menu lateral a mostra em dispositivos grandes-->
 <ion-split-pane>
-    <ion-menu [content]="conteudo">
+    <ion-menu [content]="conteudo" *ngIf="usuarioLogado">
         <ion-content>
 
             <ion-item id="cabecalho-menu" class="cabecalho-menu">
                 <div>
                     <ion-avatar item-start>
-                        <img src="assets/img/avatar-profile.jpg">
+                        <img src="assets/img/avatar-padrao.jpg">
                     </ion-avatar>
                 </div>
-                <h2>Tiago Luz</h2>
-                <p>tiago@olimposistema.com</p>
+                <h2>{{usuarioLogado.nome}}</h2>
+                <p>{{usuarioLogado.email}}}</p>
             </ion-item>
 
 
