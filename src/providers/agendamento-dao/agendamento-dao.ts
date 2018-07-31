@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AgendamentoDaoProvider {
 
+
   constructor(private _storage: Storage) {
     
   }
@@ -24,6 +25,17 @@ export class AgendamentoDaoProvider {
     let promisse = this._storage.set(chave, agendamento); //retorna uma promisse
     return Observable.fromPromise(promisse); //converte para observable e retorna um observable
   }
+
+  recupera(agendamentoId){
+    
+    //Método get retorna uma promisse por isso vamos converter para um observable
+
+    let promisse = this._storage.get(agendamentoId);//se o dado existir retona true, senao retorna false
+    return Observable.fromPromise(promisse); //retorna um observable com um agendamento dentro dele
+       
+
+  }
+
 
   ehDuplicado(agendamento: Agendamento){
     let chave = this._geraChave(agendamento);

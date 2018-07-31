@@ -32,6 +32,20 @@ export class ListaAgendamentosPage {
       );
   }
 
+  //executa quando a tela entrou na cara do usuario ahahhaha
+  ionViewDidEnter(){
+    setTimeout(() => this.atualizaAgendamentos(), 5000) //depois de 5 segundos executar funcao
+  }
+
+  atualizaAgendamentos(){
+    this.agendamentos
+      .filter((agendamento : Agendamento) => agendamento.confirmado ) //pegando somente os agendamentos que estao confirmados
+      .forEach((agendamento : Agendamento) => {
+        agendamento.visualizado = true;
+        this._agendamentoDao.salva(agendamento); //atualiza no banco
+      })
+  }
+
   reenvia(agendamento: Agendamento){
 
        
