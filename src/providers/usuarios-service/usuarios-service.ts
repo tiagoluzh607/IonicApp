@@ -9,6 +9,8 @@ import { Usuario } from '../../modelos/usuario';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+const CHAVE : string = 'avatar-usuario';
+
 @Injectable()
 export class UsuariosServiceProvider {
 
@@ -26,6 +28,15 @@ export class UsuariosServiceProvider {
 
   obtemUsuatioLogado(){
     return this._usuarioLogado;
+  }
+
+  salvaAvatar(avatar : string){
+      localStorage.setItem(CHAVE, avatar);
+  }
+
+  obtemAvatar() : string {
+    let imagem = localStorage.getItem(CHAVE);
+    return imagem ? imagem : 'assets/img/avatar-padrao.jpg'; //if ternario casoo tiver devolve ela caso nao existir retorna a string padrao
   }
 
 }

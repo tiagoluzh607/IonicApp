@@ -32,6 +32,10 @@ export class MyApp {
     this.nav.push(componente); //utilizando o componente de navegação para navegar para a pagina
   }
 
+  get avatar(){
+    return this._usuariosService.obtemAvatar();
+  }
+
   get usuarioLogado(){
     return this._usuariosService.obtemUsuatioLogado();
   }

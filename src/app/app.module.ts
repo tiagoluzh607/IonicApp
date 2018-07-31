@@ -21,6 +21,7 @@ import { LoginPage } from '../pages/login/login';
 import { UsuariosServiceProvider } from '../providers/usuarios-service/usuarios-service';
 import { Vibration } from '@ionic-native/vibration';
 import { DatePicker } from '@ionic-native/date-picker';
+import { Camera } from '@ionic-native/camera'
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { DatePicker } from '@ionic-native/date-picker';
     AgendamentoDaoProvider,
     UsuariosServiceProvider,
     Vibration,
-    DatePicker
+    DatePicker,
+    Camera
   
   ]
 })
