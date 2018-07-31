@@ -21,7 +21,8 @@ import { LoginPage } from '../pages/login/login';
 import { UsuariosServiceProvider } from '../providers/usuarios-service/usuarios-service';
 import { Vibration } from '@ionic-native/vibration';
 import { DatePicker } from '@ionic-native/date-picker';
-import { Camera } from '@ionic-native/camera'
+import { Camera } from '@ionic-native/camera';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { Camera } from '@ionic-native/camera'
     UsuariosServiceProvider,
     Vibration,
     DatePicker,
-    Camera
+    Camera,
+    OneSignal
   
   ]
 })
