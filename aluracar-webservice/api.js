@@ -67,7 +67,7 @@ module.exports = app => {
         const agendamentoId = agendamento.emailCliente + agendamento.data.substr(0, 10);
 
         const message = { 
-            app_id: "APP-ID-ONESIGNAL",
+            app_id: "1a0338ec-543f-44d5-b712-7a41a05ccf76", //pego no site do onsignal menu configurações/chaves e ids, campo id do aplicativo onesignal
             headings: {"en": "Aluracar"},
             contents: {"en": "Agendamento confirmado!"},
             data: {"agendamento-id": agendamentoId},
@@ -76,7 +76,7 @@ module.exports = app => {
 
         const headers = {
             "Content-Type": "application/json; charset=utf-8",
-            "Authorization": "Basic CODIGO-DE-AUTORIZACAO"
+            "Authorization": "Basic OWNlYWE2MGItN2RjNy00YzdiLWI4MzktNzUwNmMwMzBiNWI5" //pego no site do onsignal menu configurações/chaves, campo chave da API rest,
         };
         
         const options = {
