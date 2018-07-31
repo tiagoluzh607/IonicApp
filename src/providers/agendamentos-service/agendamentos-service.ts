@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AgendamentosServiceProvider {
 
-  private _url : string = 'http://192.168.15.3:8080/api';
+  private _url : string = 'http://192.168.15.9:8080/api';
 
   constructor(private _http: HttpClient) {
     
